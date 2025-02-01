@@ -48,10 +48,22 @@ def salvar_dados(nome_arquivo, dados):
     
 def cadastrar_livro(livros):
     id = len(livros) + 1
-    titulo  = input("Título do Livro: ")
-    autor = input("Autor: ")
-    ano = input("Ano de Publicação: ")
-    isbn = input("ISBN: ")
+    titulo  = input("Título do Livro: ").strip()
+    if not titulo:
+         print("Título não pode ser vazio.")
+         return
+    autor = input("Autor: ").strip()
+    if not autor:
+         print("Autor não pode ser vazio.")
+         return
+    ano = input("Ano de Publicação: ").strip()
+    if not ano.isdigit() or int(ano) <= 0:
+         print("Ano de publicação inválido")
+         return
+    isbn = input("ISBN: ").strip()
+    if not isbn:
+         print("ISBN não pode ser vazio.")
+         return
     livro = Livro(id, titulo, autor, ano, isbn)
     livros.append(livro.__dict__)
     salvar_dados('livros.json', livros)
@@ -63,9 +75,18 @@ def listar_livros(livros):
             livro.exibir_informacoes()
 def cadastrar_usuario(usuarios):
         id = len(usuarios) + 1
-        nome = input("Nome do Usuário: ")
-        email = input("Email: ")
-        telefone = input("Telefone: ")
+        nome = input("Nome do Usuário: ").strip()
+        if not nome:
+             print("Nome não pode ser vazio.")
+             return
+        email = input("Email: ").strip()
+        if "@" not in email or "." not in email:
+             print("Email inválido.")
+             return
+        telefone = input("Telefone: ").strip()
+        if not telefone.isdigit() or len(telefone) < 10:
+             print("Telefone inválido. Deve conter pelo menos 10 dígitos")
+             return
         usuario = Usuario(id, nome, email, telefone)
         usuarios.append(usuario.__dict__)
         salvar_dados('usuarios.json', usuarios)
@@ -149,6 +170,40 @@ def gerar_relatorio_emprestimos(emprestimos, usuarios, livros):
           if usuario and livro:
                status = "Devolvido" if emprestimo.data_devolucao else "Pendente"
                print(f"Emprestimo ID: {emprestimo.id}, Usuário: {usuario['nome']}, Livro: {livro['titulo']}, Data Empréstimo: {emprestimo.data_emprestimo}, Data Devolução: {emprestimo.data_devolucao}, Status:{status}")
+
+def atualizar_livros(livros):
+     id_livro = int(input("Digite o ID do livro a ser atualizado: "))
+     livro = next((l for l in livros if l['id'] == id_livro), None)
+     if not livro:
+          print("Livro não encontrado.")
+          return
+     print(f"Atualizando Livro ID {id_livro}:")
+     novo_titulo = input(f"Novo Título (atual: {livro['titulo']}): ") or livro['titulo']
+     novo_autor = input(f"Novo autor (atual: {livro['autor']}): ") or livro['autor']
+     novo_ano = input(f"Novo Ano de Publicação (atual: {livro['ano']}) ")or livro['ano']
+     novo_isbn = input(f"Novo ISBN (atual: {livro['isbn']}): ") or livro['isbn']
+     livro['titulo'] = novo_titulo
+     livro['autor'] = novo_autor
+     livro['ano'] = novo_ano
+     livro['isbn'] = novo_isbn
+     salvar_dados('livros.json', livros)
+     logging.info(f"Livro ID {id_livro} atualizado com sucesso!")
+def atualizar_usuario(usuarios):
+     id_usuario = int(input("Digite o ID do usuário a ser atualizado: "))
+     usuario = next((u for u in usuarios if u['id'] == id_usuario), None)
+     if not usuario:
+          print("Usuário não encontrado.")
+          return
+     print(f"Atualizando Usuário ID {id_usuario}:")
+     novo_nome = input(f"Novo Nome (atual: {usuario['nome']}): ") or usuario['nome']
+     novo_email = input(f"Novo Email (atual: {usuario['email']}): ") or usuario['email']
+     novo_telefone = input(f"Novo Telefone (atual: {usuario['telefone']}): ") or usuario['telefone']
+
+     usuario['nome'] = novo_nome
+     usuario['email'] = novo_email
+     usuario['telefone'] = novo_telefone
+     salvar_dados('usuarios.json', usuarios)
+     logging.info(f"Usuário ID {id_usuario} atualizado com sucesso.")
 def menu():
      print("\n=== Sistema de Gerenciamento de Biblioteca ===")
      print("1. Cadastrar Livro")
@@ -161,7 +216,9 @@ def menu():
      print("8. Pesquisar Livros")
      print("9. Pesquisar Usuários")
      print("10. Gerar Relatório de Empréstimos")
-     print("11. Sair")
+     print("11. Atualizar Livro")
+     print("12. Atualizar Usuário")
+     print("13. Sair")
      opcao = input("Escolha uma opção: ")
      return opcao
 def main():
@@ -191,6 +248,10 @@ def main():
           elif opcao == '10':
                gerar_relatorio_emprestimos(emprestimos, usuarios, livros)
           elif opcao == '11':
+               atualizar_livros(livros)
+          elif opcao == '12':
+               atualizar_usuario(usuarios)
+          elif opcao == '13':
                print("Encerrando o sistema de biblioteca. Até mais!")
                break
           else:

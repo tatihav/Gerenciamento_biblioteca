@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "titulo": "O gato",
+        "autor": "Papagaio do ataca\u00e7\u00e3o",
+        "ano": "2024",
+        "isbn": "546",
+        "disponivel": true
+    },
+    {
+        "id": 2,
+        "titulo": "io io",
+        "autor": "tatiana",
+        "ano": "2028",
+        "isbn": "568",
+        "disponivel": true
+    }
+]

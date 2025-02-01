@@ -1,0 +1,36 @@
+Objetivo do Projeto
+Desenvolver um Sistema de Gerenciamento de Biblioteca que permita:
+● Cadastrar novos livros e usuários.
+● Emprestar e devolver livros.
+● Pesquisar livros e usuários.
+● Listar livros disponíveis e emprestados.
+● Gerar relatórios de empréstimos.
+● Persistir dados em arquivos para garantir que as informações sejam mantidas entre
+as execuções do programa.
+● Testar funcionalidades para garantir a confiabilidade do sistema.
+
+
+Planejamento do Projeto
+Antes de começar a codificar, vamos planejar como nosso sistema funcionará. Um bom
+planejamento é como desenhar um mapa antes de uma viagem longa; ele ajuda a evitar
+desvios desnecessários e garante que você chegue ao destino com eficiência.
+Funcionalidades Principais
+1. Cadastro de Livros
+○ Entrada: Título, autor, ano de publicação, ISBN.
+○ Ação: Adicionar um novo livro ao sistema.
+2. Cadastro de Usuários
+○ Entrada: Nome, e-mail, telefone.
+○ Ação: Registrar um novo usuário na biblioteca.
+3. Empréstimo de Livros
+○ Entrada: ID do usuário, ID do livro.
+○ Ação: Registrar o empréstimo de um livro para um usuário.
+4. Devolução de Livros
+○ Entrada: ID do empréstimo.
+○ Ação: Registrar a devolução de um livro.
+5. Pesquisa de Livros e Usuários
+○ Entrada: Termo de pesquisa.
+○ Ação: Buscar livros ou usuários que correspondam ao termo.
+6. Listagem de Livros
+○ Ação: Exibir livros disponíveis e emprestados.
+7. Relatórios de Empréstimos
+○ Ação: Gerar relatórios detalhados sobre os empréstimos realizados.

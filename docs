@@ -11,9 +11,6 @@ as execuções do programa.
 
 
 Planejamento do Projeto
-Antes de começar a codificar, vamos planejar como nosso sistema funcionará. Um bom
-planejamento é como desenhar um mapa antes de uma viagem longa; ele ajuda a evitar
-desvios desnecessários e garante que você chegue ao destino com eficiência.
 Funcionalidades Principais
 1. Cadastro de Livros
 ○ Entrada: Título, autor, ano de publicação, ISBN.
